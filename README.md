@@ -8,7 +8,7 @@ Supervisor: Xavier Grand, PhD & Bioinformatics Research Engineer
 
 ## Context
 
-Hepatitis B virus (HBV) infects over 254 million people worldwide and causes more than 1 million deaths per year. Its high genetic diversity — 10 genotypes (A–J) and 40+ subgenotypes — makes a single linear reference genome insufficient for genomic analysis.
+Hepatitis B virus (HBV) infects over 254 million people worldwide and causes more than 1 million deaths per year. Its high genetic diversity with 10 genotypes (A–J) and 40+ subgenotypes, makes a single linear reference genome insufficient for genomic analysis.
 
 This project builds a **graph-based pangenome** of HBV from 43 reference sequences representing all known genotypes. A pangenome captures the full genetic diversity of a species rather than relying on a single reference, enabling more accurate alignment, variant calling, and cross-genotype data sharing within the scientific community.
 
