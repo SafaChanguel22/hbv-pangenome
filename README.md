@@ -1,7 +1,7 @@
 # HBV Pangenome Graph Construction
 
-**Internship project — Lyon Hepatology Institute (UMR PaThLiv), 2025**  
-Supervisor: Xavier Grand, PhD — Bioinformatics Research Engineer  
+**Internship project at Lyon Hepatology Institute (UMR PaThLiv), 2025**  
+Supervisor: Xavier Grand, PhD & Bioinformatics Research Engineer  
 École Centrale de Nantes · Option: Digital Sciences for Life Sciences & Healthcare
 
 ---
