@@ -103,3 +103,77 @@ HBVdb sequences (multiFASTA)
 
 ## Results
 
+### Graph Statistics
+
+| Metric | PGGB | MC-clip | MC-filter | MC-full |
+|--------|------|---------|-----------|---------|
+| Nodes | 3534 | 2602 | 2142 | 2607 |
+| Edges | 5298 | 3789 | 2810 | 3795 |
+| Total length (bp) | 7357 | 4392 | 3905 | 4397 |
+| Avg segment length (bp) | 2.08 | 1.69 | 1.82 | 1.69 |
+| Paths (input sequences) | 43 | 28 | 28 | 28 |
+
+### Alignment Quality (PGGE Metrics)
+
+Both graphs successfully represent HBV genetic diversity with high quality:
+
+- **Alignment identity (aln.id)**: >0.97 for most sequences in both graphs
+- **Query sequence containment (qsc)**: >0.95, near-complete coverage
+- **Unique alignments (uniq)**: >0.95, high specificity
+- **Non-aligned bases (nonaln)**: ~0, minimal uncovered sequence
+
+**MC-clip outperforms PGGB** on all four metrics, with higher median identity, better coverage, and fewer non-aligned bases.
+
+### Conclusion
+
+Minigraph-Cactus with `--gfa clip` was selected as the optimal configuration for HBV pangenome construction, providing better alignment fidelity and a more compact graph structure compared to PGGB.
+
+---
+
+## Scripts
+
+### `scripts/entete.py`
+Reformats HBVdb FASTA headers to PanSN format required by PGGB and PGGE.
+
+```bash
+python scripts/entete.py
+# Enter input FASTA path and output FASTA path when prompted
+```
+
+**Dependencies**: `biopython`
+
+### `scripts/beehave_adapted.R`
+Generates boxplot visualizations of PGGE alignment metrics, adapted from the original [beehave.R](https://github.com/pangenome/pgge/blob/master/scripts/beehave.R) by Heinrich Heumos.
+
+**Modifications from original**:
+- Added `origin` column support to compare multiple graph builders on one plot
+- Replaced violin plots with boxplots for clearer multi-graph comparison
+- Removed overlapping sequence labels
+
+**Dependencies**: `tidyverse`, `ggrepel`, `gridExtra`
+
+---
+
+## Environment
+
+- OS: Linux Ubuntu (Bash terminal)
+- Containers: Docker, Singularity
+- Languages: Python (BioPython), R (tidyverse)
+
+---
+
+## References
+
+- McNaughton et al. (2020). Analysis of genomic-length HBV sequences. *J Gen Virol*
+- Hickey et al. (2024). Pangenome graph construction with Minigraph-Cactus. *Nat Biotechnol*
+- Garrison et al. (2024). Building pangenome graphs (PGGB). *Nat Methods*
+- HBVdb: https://hbvdb.lyon.inserm.fr/
+
+---
+
+## Author
+
+**Safa Changuel** 
+Engineering student, École Centrale de Nantes  
+safa.changuel.pro@gmail.com | [LinkedIn](https://linkedin.com/in/safa-changuel)
+
