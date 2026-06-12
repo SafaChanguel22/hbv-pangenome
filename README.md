@@ -79,16 +79,15 @@ HBVdb sequences (multiFASTA)
 
 ### Tools Used
 
-| Tool | Purpose |
-|------|---------|
-| Minigraph-Cactus (MC) | Reference-guided pangenome graph construction |
-| PGGB | Reference-free pangenome graph construction (all-vs-all) |
-| Bandage | Graph visualization |
-| GFAtools | Graph statistics (nodes, edges, lengths) |
-| ODGI | Path analysis and topology |
-| VG toolkit | GFA format conversion (v1.0 ↔ v1.1) |
-| PGGE | Alignment quality evaluation |
-| Docker / Singularity | Containerized execution of bioinformatics tools |
+| Tool | Purpose | Link |
+|---|---|---|
+| PGGB | Reference-free pangenome graph construction using all-vs-all genome alignment | https://github.com/pangenome/pggb |
+| Cactus | Multiple genome alignment and pangenome graph generation | https://github.com/ComparativeGenomicsToolkit/cactus |
+| Bandage | Visualization and exploration of assembly and pangenome graphs | https://rrwick.github.io/Bandage/ |
+| GFAtools | Graph statistics and manipulation of GFA files | https://github.com/lh3/gfatools |
+| ODGI | Pangenome graph analysis, path extraction and graph topology operations | https://github.com/pangenome/odgi |
+| VG toolkit | Variation graph construction, manipulation, analysis and format conversion | https://github.com/vgteam/vg |
+| PGGE | Evaluation of pangenome graph alignment quality | https://github.com/pangenome/pgge |
 
 ### Key Technical Challenges
 
