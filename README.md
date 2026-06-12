@@ -20,6 +20,7 @@ This work is part of a larger project aimed at developing an open-source **HBV g
 ## Biological Questions
 
 > How can we construct a pangenome graph that faithfully represents the genetic diversity of HBV across all known genotypes?
+
 > What criteria can be used to assess the quality of a pangenome obtained in this way?
 
 ---
