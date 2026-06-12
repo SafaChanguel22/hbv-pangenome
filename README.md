@@ -21,3 +21,43 @@ This work is part of a larger project aimed at developing an open-source **HBV g
 > How can we construct a pangenome graph that faithfully represents the genetic diversity of HBV across all known genotypes?
 
 ---
+
+## Methods
+
+### Data
+- 43 HBV reference sequences from [HBVdb](https://hbvdb.lyon.inserm.fr/), selected following McNaughton et al. (2020)
+- Covers all 10 known HBV genotypes (A–J)
+- Input format: multiFASTA
+
+### Pipeline Overview
+
+```
+HBVdb sequences (multiFASTA)
+        │
+        ▼
+[entete.py] — FASTA header adaptation to PanSN format
+        │
+        ├──────────────────────┐
+        ▼                      ▼
+[Minigraph-Cactus]         [PGGB]
+(reference-guided)         (all-vs-all)
+        │                      │
+        └──────────┬───────────┘
+                   ▼
+          GFA pangenome graphs
+                   │
+        ┌──────────┼──────────┐
+        ▼          ▼          ▼
+   [Bandage]  [GFAtools]   [ODGI]
+  (visualize) (statistics) (path analysis)
+                   │
+                   ▼
+              [VG toolkit]
+          (format conversion)
+                   │
+                   ▼
+              [PGGE + beehave_adapted.R]
+          (quality evaluation + visualization)
+```
+
+### Tools Used
