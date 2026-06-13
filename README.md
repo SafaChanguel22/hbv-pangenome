@@ -139,17 +139,14 @@ Reformats HBVdb FASTA headers to PanSN format required by PGGB and PGGE.
 python scripts/entete.py
 # Enter input FASTA path and output FASTA path when prompted
 ```
-### `scripts/beehave_adapted.R`
-Performs Pangenome Quality Metrics Visualization
-Adapted from the original beehave.R script by Heinrich Heumos (PGGE project).
-Original: https://github.com/pangenome/pgge/blob/master/scripts/beehave.R
+**Dependencies**: `biopython`
 
-Modifications made:
-   - Added an 'origin' column to distinguish graphs from different builders
-     (Minigraph-Cactus variants and PGGB) in a single merged TSV
-   - Replaced violin plots with box plots for clearer median/quartile reading
-     when comparing multiple graphs simultaneously
-   - Removed overlapping sequence labels (ggrepel overlap issue with 44+ points)
+### `scripts/beehave_adapted.R`
+Generates boxplot visualizations of PGGE alignment metrics, adapted from the original [beehave.R](https://github.com/pangenome/pgge/blob/master/scripts/beehave.R) by Heinrich Heumos.
+
+**Modifications from original**:
+- Replaced violin plots with boxplots for clearer multi-graph comparison
+- Removed overlapping sequence labels (ggrepel overlap issue with 44+ points)
 
 Metrics visualized:
    - aln.id  : alignment identity (proportion of identical bases)
@@ -159,21 +156,38 @@ Metrics visualized:
 
  Input:  TSV file with PGGE metrics + 'origin' column indicating graph builder
  Output: PNG with 4 boxplots (one per metric)
-```bash
-Rscript beehave_adapted.R <input.tsv> <output.png>
-```
-
-**Dependencies**: `biopython`
-
-### `scripts/beehave_adapted.R`
-Generates boxplot visualizations of PGGE alignment metrics, adapted from the original [beehave.R](https://github.com/pangenome/pgge/blob/master/scripts/beehave.R) by Heinrich Heumos.
-
-**Modifications from original**:
-- Added `origin` column support to compare multiple graph builders on one plot
-- Replaced violin plots with boxplots for clearer multi-graph comparison
-- Removed overlapping sequence labels
 
 **Dependencies**: `tidyverse`, `ggrepel`, `gridExtra`
+
+## Usage
+
+### Step 1 — Run PGGE for each graph
+```bash
+pgge -g graph_MC.gfa -f sequences.fasta -o output_MC.tsv
+pgge -g graph_PGGB.gfa -f sequences.fasta -o output_PGGB.tsv
+```
+
+### Step 2 — Add the `origin` column to each TSV
+Before merging, add a column identifying which graph each file comes from:
+
+```bash
+# Add 'origin' column to each TSV
+awk 'BEGIN{OFS="\t"} NR==1{print $0, "origin"} NR>1{print $0, "MC-clip"}' output_MC.tsv > output_MC_labeled.tsv
+awk 'BEGIN{OFS="\t"} NR==1{print $0, "origin"} NR>1{print $0, "PGGB"}' output_PGGB.tsv > output_PGGB_labeled.tsv
+```
+
+### Step 3 — Merge the labeled TSV files
+```bash
+# Keep header from first file only
+head -1 output_MC_labeled.tsv > input.tsv
+tail -n +2 output_MC_labeled.tsv >> input.tsv
+tail -n +2 output_PGGB_labeled.tsv >> input.tsv
+```
+
+### Step 4 — Run the visualization script
+```bash
+Rscript beehave_adapted.R input.tsv output.png
+```
 
 ---
 
