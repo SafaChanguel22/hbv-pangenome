@@ -139,6 +139,29 @@ Reformats HBVdb FASTA headers to PanSN format required by PGGB and PGGE.
 python scripts/entete.py
 # Enter input FASTA path and output FASTA path when prompted
 ```
+### `scripts/beehave_adapted.R`
+Performs Pangenome Quality Metrics Visualization
+Adapted from the original beehave.R script by Heinrich Heumos (PGGE project).
+Original: https://github.com/pangenome/pgge/blob/master/scripts/beehave.R
+
+Modifications made:
+   - Added an 'origin' column to distinguish graphs from different builders
+     (Minigraph-Cactus variants and PGGB) in a single merged TSV
+   - Replaced violin plots with box plots for clearer median/quartile reading
+     when comparing multiple graphs simultaneously
+   - Removed overlapping sequence labels (ggrepel overlap issue with 44+ points)
+
+Metrics visualized:
+   - aln.id  : alignment identity (proportion of identical bases)
+   - qsc     : query sequence containment (coverage of input sequences)
+   - uniq    : unique query matches (alignment specificity)
+   - nonaln  : non-aligned bases (proportion not covered by graph)
+
+ Input:  TSV file with PGGE metrics + 'origin' column indicating graph builder
+ Output: PNG with 4 boxplots (one per metric)
+```bash
+Rscript beehave_adapted.R <input.tsv> <output.png>
+```
 
 **Dependencies**: `biopython`
 
